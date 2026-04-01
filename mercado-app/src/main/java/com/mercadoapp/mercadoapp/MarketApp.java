@@ -17,16 +17,20 @@ public class MarketApp extends Application {
 
         DBInitializer dbInitializer = new DBInitializer();
         dbInitializer.initDatabase();
-        Category category = new Category(null,"Mercearia");
 
         CategoryDAO dao = new CategoryDAO();
+        Category category = new Category(null,"Mercearia");
+        Category category2 = new Category(null,"Higiene");
+        Category category3 = new Category(null,"Limpeza");
+        //dao.save(category);
+        //dao.save(category2);
+        //dao.save(category3);
+
         List<Category> categories = dao.findAll();
-        dao.findAll().forEach(c -> {
-            System.out.println(c.getName());
-            System.out.println(c.getName());
+        categories.forEach(c -> {
+            System.out.println("Id: " + c.getId() + ", Nome: " + c.getName());
         });
-        System.out.println(dao.findAll());
-        FXMLLoader fxmlLoader = new FXMLLoader(MarketApp.class.getResource("/com/mercadoapp/mercadoapp/main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MarketApp.class.getResource("/com/mercadoapp/mercadoapp/fxml/main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Market App!");
         stage.setScene(scene);

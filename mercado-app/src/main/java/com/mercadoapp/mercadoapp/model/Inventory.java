@@ -1,4 +1,4 @@
 package com.mercadoapp.mercadoapp.model;
 
-public class Product {
+public class Inventory {
 }

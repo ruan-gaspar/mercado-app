@@ -1,0 +1,16 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="15.0"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.mercadoapp.mercadoapp.controller.MainController">
+<padding>
+    <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+</padding>
+
+    <Button fx:id="orderButton" text="Lista de Compras" onAction="#openOrderScreen"/>
+    <Button fx:id="itemListButton" text="Lista de itens" onAction="#openInventoryScreen"/>
+    <Button fx:id="productButton" text="Produtos" onAction="#openItemDetailScreen"/>
+    <Button fx:id="categoryButton" text="Categorias" onAction="#openCategoryScreen"/>
+    <Button fx:id="sectorButton" text="Setores" onAction="#openSectorScreen"/>
+</VBox>

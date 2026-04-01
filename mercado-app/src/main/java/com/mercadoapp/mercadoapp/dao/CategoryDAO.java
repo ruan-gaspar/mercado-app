@@ -44,4 +44,17 @@ public class CategoryDAO {
         }
         return categories;
     }
+    public void delete(Category category) {
+        String sql = "DELETE FROM category WHERE id = ?";
+        try (Connection conn = SQLiteConnection.connect();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, category.getName());
+            stmt.executeUpdate();
+
+            System.out.println("Excluído com sucesso!");
+        }catch (SQLException e) {
+            throw new RuntimeException("Erro ao excluir categoria", e);
+        }
+
+    }
 }
