@@ -3,11 +3,12 @@ package com.mercadoapp.mercadoapp.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class SQLiteConnection {
 
     private static final String URL = "jdbc:sqlite:mercado.db";
-/**
+    /**
  * Método para conectar ao SQLite se houver conexão. Se não houver, ele cria. */
     public static Connection connect() {
         try{
