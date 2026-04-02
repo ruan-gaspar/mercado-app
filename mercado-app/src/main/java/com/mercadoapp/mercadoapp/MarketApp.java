@@ -26,10 +26,7 @@ public class MarketApp extends Application {
         //dao.save(category2);
         //dao.save(category3);
 
-        List<Category> categories = dao.findAll();
-        categories.forEach(c -> {
-            System.out.println("Id: " + c.getId() + ", Nome: " + c.getName());
-        });
+
         FXMLLoader fxmlLoader = new FXMLLoader(MarketApp.class.getResource("/com/mercadoapp/mercadoapp/fxml/main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Market App!");

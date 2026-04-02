@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
-    public void save(Category category) {
+    public void create(Category category) {
             String sql = """
                     INSERT INTO category_table (name)
                     VALUES (?)
@@ -44,7 +44,7 @@ public class CategoryDAO {
         }
         return categories;
     }
-    public void delete(Category category) {
+    public void deleteById(Category category) {
         String sql = "DELETE FROM category_table WHERE id = ?";
         try (Connection conn = SQLiteConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -55,6 +55,23 @@ public class CategoryDAO {
         }catch (SQLException e) {
             throw new RuntimeException("Erro ao excluir categoria", e);
         }
+    }
+    public void update(Category category) {
+        String sql = """
+                UPDATE category_table
+                SET name=?
+                WHERE id=?
+                """;
 
+        try (Connection conn = SQLiteConnection.connect();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, category.getName());
+            stmt.setInt(2, category.getId());
+            stmt.executeUpdate();
+
+            System.out.println("Atualizado com sucesso!");
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar categoria", e);
+        }
     }
 }

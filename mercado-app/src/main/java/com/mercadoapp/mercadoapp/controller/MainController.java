@@ -12,6 +12,8 @@ public class MainController {
     @FXML
     private Button categoryButton;
     @FXML
+    private Button sectorButton;
+    @FXML
     protected void openOrderScreen() {
         System.out.println("Compras");
     }
@@ -29,7 +31,7 @@ public class MainController {
     }
     @FXML
     protected void openSectorScreen() {
-        System.out.println("Setores");
+        changeScene("/com/mercadoapp/mercadoapp/fxml/sector-view.fxml", sectorButton);
     }
     private void changeScene(String fxmlPath, Button button) {
         try{

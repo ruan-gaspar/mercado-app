@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CategoryController {
     @FXML
@@ -30,7 +31,15 @@ public class CategoryController {
     private TableColumn<Category, String> nameColumn;
 
     @FXML
+    private TextField categoryNameField;
+
+    @FXML
     public void initialize() {
+        categoryTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newSelection) -> {
+           if (newSelection != null) {
+               categoryNameField.setText(newSelection.getName());
+           }
+        });
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -38,14 +47,13 @@ public class CategoryController {
     }
     protected void loadCategories() {
         CategoryDAO dao = new CategoryDAO();
+        List<Category> categories = dao.findAll();
 
         ObservableList<Category> list = FXCollections.observableArrayList();
-        list.addAll(dao.findAll());
+        list.addAll(categories);
 
         categoryTable.setItems(list);
     }
-    @FXML
-    private TextField categoryNameField;
     @FXML
     protected void onAddCategory() {
         String name = categoryNameField.getText();
@@ -53,7 +61,7 @@ public class CategoryController {
             return;
         }
         CategoryDAO dao = new CategoryDAO();
-        dao.save(new Category(null , name));
+        dao.create(new Category(null , name));
 
         categoryNameField.clear();
 
@@ -67,7 +75,28 @@ public class CategoryController {
             return;
         }
         CategoryDAO dao = new CategoryDAO();
-        dao.delete(selected);
+        dao.deleteById(selected);
+
+        categoryNameField.clear();
+
+        loadCategories();
+    }
+    @FXML
+    protected void onUpdateCategory() {
+        Category selected = categoryTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            return;
+        }
+        String newName = categoryNameField.getText();
+
+        if (newName == null || newName.isBlank()) {
+            return;
+        }
+        selected.setName(newName);
+
+        CategoryDAO dao = new CategoryDAO();
+        dao.update(selected);
 
         categoryNameField.clear();
 

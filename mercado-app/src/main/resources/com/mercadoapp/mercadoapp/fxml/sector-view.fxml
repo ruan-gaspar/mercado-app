@@ -9,17 +9,17 @@
 <?import javafx.scene.control.TextField?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mercadoapp.mercadoapp.controller.CategoryController">
+      fx:controller="com.mercadoapp.mercadoapp.controller.SectorController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
     <Button fx:id="backButton" text="Voltar" onAction="#goBackToMain"/>
-    <TextField fx:id="categoryNameField" promptText="Nome da categoria"/>
-    <Button text="Adicionar categoria" onAction="#onAddCategory"/>
-    <Button text="Remover categoria" onAction="#onDeleteCategory"/>
+    <TextField fx:id="sectorNameField" promptText="Nome da categoria"/>
+    <Button text="Adicionar categoria" onAction="#onAddSector"/>
+    <Button text="Remover categoria" onAction="#onDeleteSector"/>
     <Button text="Atualizar categoria" onAction="#onUpdateCategory"/>
 
-    <TableView fx:id="categoryTable" prefHeight="300.0" prefWidth="400.0">
+    <TableView fx:id="sectorTable" prefHeight="300.0" prefWidth="400.0">
         <columns>
             <TableColumn fx:id="idColumn" text="ID" prefWidth="80.0"/>
             <TableColumn fx:id="nameColumn" text="Nome" prefWidth="320.0"/>
