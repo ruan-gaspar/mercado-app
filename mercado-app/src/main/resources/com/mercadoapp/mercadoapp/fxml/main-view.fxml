@@ -10,7 +10,7 @@
 
     <Button fx:id="orderButton" text="Lista de Compras" onAction="#openOrderScreen"/>
     <Button fx:id="itemListButton" text="Lista de itens" onAction="#openInventoryScreen"/>
-    <Button fx:id="productButton" text="Produtos" onAction="#openItemDetailScreen"/>
+    <Button fx:id="productButton" text="Produtos" onAction="#openProductDetailScreen"/>
     <Button fx:id="categoryButton" text="Categorias" onAction="#openCategoryScreen"/>
     <Button fx:id="sectorButton" text="Setores" onAction="#openSectorScreen"/>
 </VBox>

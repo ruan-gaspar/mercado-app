@@ -13,7 +13,7 @@ import java.util.List;
 public class CategoryDAO {
     public void save(Category category) {
             String sql = """
-                    INSERT INTO category (name)
+                    INSERT INTO category_table (name)
                     VALUES (?)
                     """;
         try (Connection conn = SQLiteConnection.connect();
@@ -27,7 +27,7 @@ public class CategoryDAO {
         }
     }
     public List<Category> findAll() {
-        String sql = "SELECT * FROM category";
+        String sql = "SELECT * FROM category_table";
         List<Category> categories = new ArrayList<>();
         try(Connection conn = SQLiteConnection.connect();
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -45,10 +45,10 @@ public class CategoryDAO {
         return categories;
     }
     public void delete(Category category) {
-        String sql = "DELETE FROM category WHERE id = ?";
+        String sql = "DELETE FROM category_table WHERE id = ?";
         try (Connection conn = SQLiteConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setString(1, category.getName());
+            stmt.setInt(1, category.getId());
             stmt.executeUpdate();
 
             System.out.println("Excluído com sucesso!");

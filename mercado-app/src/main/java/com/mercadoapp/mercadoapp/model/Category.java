@@ -1,11 +1,8 @@
 package com.mercadoapp.mercadoapp.model;
-
+// Essa classe representa as categorias dos produtos do mercado
 public class Category {
     private Integer id;
     private String name;
-
-    public Category() {
-    }
 
     public Category(Integer id, String name) {
         this.id = id;

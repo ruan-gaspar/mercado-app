@@ -20,12 +20,12 @@ public class MainController {
         System.out.println("Inventário");
     }
     @FXML
-    protected void openItemDetailScreen() {
+    protected void openProductDetailScreen() {
         System.out.println("Produtos");
     }
     @FXML
     protected void openCategoryScreen() {
-        System.out.println("Categorias");
+        changeScene("/com/mercadoapp/mercadoapp/fxml/category-view.fxml", categoryButton);
     }
     @FXML
     protected void openSectorScreen() {
@@ -40,8 +40,8 @@ public class MainController {
             stage.setScene(scene);
             stage.show();
 
-        }catch(IOException e){
-            throw new RuntimeException("Erro ao trocar de tela", e);
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

@@ -1,4 +1,4 @@
 package com.mercadoapp.mercadoapp.controller;
 
-public class InventoryController {
+public class ProductController {
 }
