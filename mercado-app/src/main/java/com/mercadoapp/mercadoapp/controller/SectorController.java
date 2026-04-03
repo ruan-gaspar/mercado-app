@@ -33,6 +33,8 @@ public class SectorController {
     @FXML
     private TextField sectorNameField;
 
+    private final SectorDAO sectorDAO = new SectorDAO();
+
     @FXML
     public void initialize() {
         sectorTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newSelection) -> {
@@ -46,13 +48,12 @@ public class SectorController {
         loadSectors();
     }
     protected void loadSectors() {
-        SectorDAO dao = new SectorDAO();
-        List<Sector> sectors = dao.findAll();
-
-        ObservableList<Sector> list = FXCollections.observableArrayList();
-        list.addAll(sectors);
-
-        sectorTable.setItems(list);
+        List<Sector> sectors = sectorDAO.findAll();
+        sectorTable.setItems(FXCollections.observableList(sectors));
+    }
+    private void clearFields() {
+        sectorNameField.clear();
+        sectorTable.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -61,10 +62,9 @@ public class SectorController {
         if (name == null || name.isBlank()) {
             return;
         }
-        SectorDAO dao = new SectorDAO();
-        dao.create(new Sector(null , name));
+        sectorDAO.create(new Sector(null , name));
 
-        sectorNameField.clear();
+        clearFields();
 
         loadSectors();
     }
@@ -76,15 +76,13 @@ public class SectorController {
         if (selected == null) {
             return;
         }
-        SectorDAO dao = new SectorDAO();
-        dao.delete(selected);
+        sectorDAO.delete(selected);
 
-        sectorNameField.clear();
-
+        clearFields();
         loadSectors();
     }
     @FXML
-    protected void onUpdateCategory() {
+    protected void onUpdateSector() {
         Sector selected = sectorTable.getSelectionModel().getSelectedItem();
 
         if (selected == null) {
@@ -95,12 +93,10 @@ public class SectorController {
         if (newName == null || newName.isBlank()) {
             return;
         }
-        selected.setName(newName);
+        Sector updated = new Sector(selected.getId(), newName);
 
-        SectorDAO dao = new SectorDAO();
-        dao.update(selected);
-
-        sectorNameField.clear();
+        sectorDAO.update(updated);
+        clearFields();
 
         loadSectors();
     }

@@ -3,7 +3,6 @@ package com.mercadoapp.mercadoapp.controller;
 import com.mercadoapp.mercadoapp.dao.CategoryDAO;
 import com.mercadoapp.mercadoapp.model.Category;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,6 +32,8 @@ public class CategoryController {
     @FXML
     private TextField categoryNameField;
 
+    private final CategoryDAO categoryDAO = new CategoryDAO();
+
     @FXML
     public void initialize() {
         categoryTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newSelection) -> {
@@ -46,38 +47,36 @@ public class CategoryController {
         loadCategories();
     }
     protected void loadCategories() {
-        CategoryDAO dao = new CategoryDAO();
-        List<Category> categories = dao.findAll();
-
-        ObservableList<Category> list = FXCollections.observableArrayList();
-        list.addAll(categories);
-
-        categoryTable.setItems(list);
+        List<Category> categories = categoryDAO.findAll();
+        categoryTable.setItems(FXCollections.observableList(categories));
     }
+    private void clearFields() {
+        categoryNameField.clear();
+        categoryTable.getSelectionModel().clearSelection();
+    }
+
     @FXML
     protected void onAddCategory() {
         String name = categoryNameField.getText();
         if (name == null || name.isBlank()) {
             return;
         }
-        CategoryDAO dao = new CategoryDAO();
-        dao.create(new Category(null , name));
+        categoryDAO.create(new Category(null, name));
 
-        categoryNameField.clear();
+        clearFields();
 
         loadCategories();
     }
     @FXML
     protected void onDeleteCategory() {
-        Category selected = categoryTable.getSelectionModel().getSelectedItem();
+        Category deleted = categoryTable.getSelectionModel().getSelectedItem();
 
-        if (selected == null) {
+        if (deleted == null) {
             return;
         }
-        CategoryDAO dao = new CategoryDAO();
-        dao.delete(selected);
+        categoryDAO.delete(deleted);
 
-        categoryNameField.clear();
+        clearFields();
 
         loadCategories();
     }
@@ -93,12 +92,11 @@ public class CategoryController {
         if (newName == null || newName.isBlank()) {
             return;
         }
-        selected.setName(newName);
+        Category updated = new Category(selected.getId(), newName);
 
-        CategoryDAO dao = new CategoryDAO();
-        dao.update(selected);
+        categoryDAO.update(updated);
 
-        categoryNameField.clear();
+        clearFields();
 
         loadCategories();
     }
