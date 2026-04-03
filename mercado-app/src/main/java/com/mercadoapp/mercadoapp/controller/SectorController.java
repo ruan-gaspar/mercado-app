@@ -1,8 +1,6 @@
 package com.mercadoapp.mercadoapp.controller;
 
-import com.mercadoapp.mercadoapp.dao.CategoryDAO;
 import com.mercadoapp.mercadoapp.dao.SectorDAO;
-import com.mercadoapp.mercadoapp.model.Category;
 import com.mercadoapp.mercadoapp.model.Sector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -79,7 +77,7 @@ public class SectorController {
             return;
         }
         SectorDAO dao = new SectorDAO();
-        dao.deleteById(selected);
+        dao.delete(selected);
 
         sectorNameField.clear();
 

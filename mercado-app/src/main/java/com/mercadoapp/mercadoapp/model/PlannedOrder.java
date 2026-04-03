@@ -2,15 +2,13 @@ package com.mercadoapp.mercadoapp.model;
 // Essa classe trata da lista de compras planejada para o mercado
 public class PlannedOrder {
     private Integer id;
-    private String productName;
-    private int quantity;
-    private Double expectedPrice;
+    private String name;
+    private String createdAt;
 
-    public PlannedOrder(Integer id, String productName, int quantity, Double expectedPrice) {
+    public PlannedOrder(Integer id, String name, String createdAt) {
         this.id = id;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.expectedPrice = expectedPrice;
+        this.name = name;
+        this.createdAt = createdAt;
     }
     public Integer getId() {
         return id;
@@ -18,29 +16,23 @@ public class PlannedOrder {
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
-    public int getQuantity() {
-        return quantity;
+    public String getCreatedAt() {
+        return createdAt;
     }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
-    public Double getExpectedPrice() {
-        return expectedPrice;
-    }
-    public void setExpectedPrice(Double expectedPrice) {
-        this.expectedPrice = expectedPrice;
-    }
+
     @Override
     public String toString(){
         return "Id: " + id +
-                ", Product: " + productName +
-                ", Quantity: " + quantity +
-                ", ExpectedPrice: " + expectedPrice;
+                ", Name: " + name +
+                ", CreatedAt: " + createdAt;
     }
 }

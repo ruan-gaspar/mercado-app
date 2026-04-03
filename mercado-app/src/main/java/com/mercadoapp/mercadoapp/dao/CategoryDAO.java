@@ -44,7 +44,7 @@ public class CategoryDAO {
         }
         return categories;
     }
-    public void deleteById(Category category) {
+    public void delete(Category category) {
         String sql = "DELETE FROM category_table WHERE id = ?";
         try (Connection conn = SQLiteConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)){

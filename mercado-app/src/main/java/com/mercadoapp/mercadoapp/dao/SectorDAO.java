@@ -23,7 +23,7 @@ public class SectorDAO {
 
             System.out.println("Setor criado com sucesso!");
         }catch(SQLException e){
-            throw new RuntimeException("Erro ao criar setor");
+            throw new RuntimeException("Erro ao criar setor", e);
         }
     }
     public List<Sector> findAll(){
@@ -46,7 +46,7 @@ public class SectorDAO {
         }
         return sectors;
     }
-    public void deleteById(Sector sector) {
+    public void delete(Sector sector) {
 
         String sql = "DELETE FROM sector_table WHERE id = ?";
 
@@ -58,7 +58,7 @@ public class SectorDAO {
             System.out.println("Setor excluído com sucesso!");
 
         }catch (SQLException e){
-            throw new RuntimeException("Erro ao excluir setor");
+            throw new RuntimeException("Erro ao excluir setor", e);
         }
     }
 

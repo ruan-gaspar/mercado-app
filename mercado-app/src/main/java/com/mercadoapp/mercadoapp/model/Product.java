@@ -3,12 +3,12 @@ package com.mercadoapp.mercadoapp.model;
 public class Product {
     private Integer id;
     private String name;
-    private double price;
+    private Double price;
     private String brand;
     private Integer categoryId;
     private Integer sectorId;
 
-    public Product(Integer id, String name, double price, String brand, Integer categoryId, Integer sectorId) {
+    public Product(Integer id, String name, Double price, String brand, Integer categoryId, Integer sectorId) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -31,7 +31,7 @@ public class Product {
     public double getPrice() {
         return price;
     }
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     public String getBrand() {

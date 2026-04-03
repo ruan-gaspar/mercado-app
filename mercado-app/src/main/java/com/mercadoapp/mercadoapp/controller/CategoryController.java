@@ -75,7 +75,7 @@ public class CategoryController {
             return;
         }
         CategoryDAO dao = new CategoryDAO();
-        dao.deleteById(selected);
+        dao.delete(selected);
 
         categoryNameField.clear();
 

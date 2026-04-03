@@ -11,12 +11,14 @@ public class DBInitializer {
         createProductTable();
         createOrderTable();
         createOrderItemTable();
+        createPlannedOrderTable();
+        createPlannedOrderItemTable();
     }
     private void createCategoryTable() {
         String sql = """
             CREATE TABLE IF NOT EXISTS category_table (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE
+            name TEXT NOT NULL
             )
         """;
         execute(sql, "category_table");
@@ -25,7 +27,7 @@ public class DBInitializer {
         String sql = """
             CREATE TABLE IF NOT EXISTS sector_table (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE
+            name TEXT NOT NULL
             )
         """;
         execute(sql, "sector_table");
@@ -34,7 +36,7 @@ public class DBInitializer {
         String sql = """
             CREATE TABLE IF NOT EXISTS product_table (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL UNIQUE,
+            name TEXT NOT NULL,
             price REAL NOT NULL,
             brand TEXT NOT NULL,
             category_id INTEGER NOT NULL,
@@ -49,7 +51,7 @@ public class DBInitializer {
         String sql = """
             CREATE TABLE IF NOT EXISTS order_table (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            month_reference TEXT NOT NULL,
+            name TEXT NOT NULL,
             created_at TEXT NOT NULL,
             total_amount REAL NOT NULL
             )
@@ -71,6 +73,32 @@ public class DBInitializer {
         """;
         execute(sql, "order_item_table");
     }
+    //---
+    private void createPlannedOrderTable() {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS planned_order_table (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            created_at TEXT NOT NULL
+            )
+        """;
+        execute(sql, "planned_order_table");
+    }
+    private void createPlannedOrderItemTable() {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS planned_order_item_table (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            planned_order_id INTEGER NOT NULL,
+            product_id INTEGER NOT NULL, 
+            planned_quantity INTEGER NOT NULL,
+            expected_price REAL NOT NULL,
+            FOREIGN KEY(planned_order_id) REFERENCES planned_order_table(id),
+            FOREIGN KEY(product_id) REFERENCES product_table(id)
+            )
+        """;
+        execute(sql, "planned_order_item_table");
+    }
+
     private void execute(String sql, String tableName){
         try(Connection conn = SQLiteConnection.connect();
             Statement stmt = conn.createStatement()) {

@@ -14,10 +14,10 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
     <Button fx:id="backButton" text="Voltar" onAction="#goBackToMain"/>
-    <TextField fx:id="sectorNameField" promptText="Nome da categoria"/>
-    <Button text="Adicionar categoria" onAction="#onAddSector"/>
-    <Button text="Remover categoria" onAction="#onDeleteSector"/>
-    <Button text="Atualizar categoria" onAction="#onUpdateCategory"/>
+    <TextField fx:id="sectorNameField" promptText="Nome do setor"/>
+    <Button text="Adicionar setor" onAction="#onAddSector"/>
+    <Button text="Remover setor" onAction="#onDeleteSector"/>
+    <Button text="Atualizar setor" onAction="#onUpdateCategory"/>
 
     <TableView fx:id="sectorTable" prefHeight="300.0" prefWidth="400.0">
         <columns>

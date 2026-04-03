@@ -2,15 +2,17 @@ package com.mercadoapp.mercadoapp.model;
 
 public class PlannedOrderItem {
     private Integer id;
-    private String productId;
+    private Integer productId;
     private Integer plannedOrderId;
     private int plannedQuantity;
+    private double expectedPrice;
 
-    public PlannedOrderItem(Integer id, String productId, Integer plannedOrderId, int plannedQuantity) {
+    public PlannedOrderItem(Integer id, Integer productId, Integer plannedOrderId, int plannedQuantity, double expectedPrice) {
         this.id = id;
         this.productId = productId;
         this.plannedOrderId = plannedOrderId;
         this.plannedQuantity = plannedQuantity;
+        this.expectedPrice = expectedPrice;
     }
     public Integer getId() {
         return id;
@@ -18,10 +20,10 @@ public class PlannedOrderItem {
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getProductId() {
+    public Integer getProductId() {
         return productId;
     }
-    public void setProductId(String productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
     public Integer getPlannedOrderId() {
@@ -36,11 +38,18 @@ public class PlannedOrderItem {
     public void setPlannedQuantity(int plannedQuantity) {
         this.plannedQuantity = plannedQuantity;
     }
+    public double getExpectedPrice() {
+        return expectedPrice;
+    }
+    public void setExpectedPrice(double expectedPrice) {
+        this.expectedPrice = expectedPrice;
+    }
     @Override
     public String toString() {
         return "Id: " + id +
-                "ProductId: " + productId +
-                "PlannedOrderId: " + plannedOrderId +
-                "PlannedQuantity: " + plannedQuantity;
+                ", ProductId: " + productId +
+                ", PlannedOrderId: " + plannedOrderId +
+                ", PlannedQuantity: " + plannedQuantity +
+               ", ExpectedPrice: " + expectedPrice;
     }
 }

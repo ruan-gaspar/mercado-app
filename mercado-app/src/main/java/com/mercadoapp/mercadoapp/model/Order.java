@@ -2,13 +2,13 @@ package com.mercadoapp.mercadoapp.model;
 // Essa classe representa uma compra mensal
 public class Order {
     private Integer id;
-    private String monthReference;
+    private String name; //Para o usuário esse vai ser o mês da compra no input
     private String createdAt;
     private double totalAmount;
 
-    public Order(Integer id, String monthReference, String createdAt, double totalAmount) {
+    public Order(Integer id, String name, String createdAt, double totalAmount) {
       this.id = id;
-      this.monthReference = monthReference;
+      this.name = name;
       this.createdAt = createdAt;
       this.totalAmount = totalAmount;
     }
@@ -18,11 +18,11 @@ public class Order {
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getMonthReference() {
-        return monthReference;
+    public String getName() {
+        return name;
     }
-    public void setMonthReference(String monthReference) {
-        this.monthReference = monthReference;
+    public void setName(String name) {
+        this.name = name;
     }
     public String getCreatedAt() {
         return createdAt;
@@ -39,7 +39,7 @@ public class Order {
     @Override
     public String toString(){
         return "Id: " + id +
-                ", MonthReference: " + monthReference +
+                ", Name (monthReference): " + name +
                 ", CreatedAt: " + createdAt +
                 ", TotalAmount: " + totalAmount;
     }
