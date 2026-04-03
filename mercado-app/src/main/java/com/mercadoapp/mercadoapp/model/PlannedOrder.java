@@ -1,5 +1,5 @@
 package com.mercadoapp.mercadoapp.model;
-// Essa classe trata da lista de compras planejada para o mercado
+// Essa classe representa a lista de compras planejada
 public class PlannedOrder {
     private Integer id;
     private String name;

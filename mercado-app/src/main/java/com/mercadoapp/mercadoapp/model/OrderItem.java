@@ -6,10 +6,10 @@ public class OrderItem {
     private Integer productId;
 
     private int quantity;
-    private double unitPrice;
-    private double subtotal;
+    private Double unitPrice;
+    private Double subtotal;
 
-    public OrderItem(Integer id,Integer orderId, Integer productId, int quantity, double unitPrice, double subtotal) {
+    public OrderItem(Integer id, Integer orderId, Integer productId, int quantity, Double unitPrice, Double subtotal) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
@@ -41,16 +41,16 @@ public class OrderItem {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    public double getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
-    public double getSubtotal() {
+    public Double getSubtotal() {
         return subtotal;
     }
-    public void setSubtotal(double subtotal) {
+    public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
     }
     @Override
