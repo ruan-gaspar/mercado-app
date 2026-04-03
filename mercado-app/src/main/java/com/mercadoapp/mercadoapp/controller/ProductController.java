@@ -1,11 +1,13 @@
 package com.mercadoapp.mercadoapp.controller;
 
+
 import com.mercadoapp.mercadoapp.dao.CategoryDAO;
 import com.mercadoapp.mercadoapp.dao.ProductDAO;
 import com.mercadoapp.mercadoapp.dao.SectorDAO;
 import com.mercadoapp.mercadoapp.model.Category;
 import com.mercadoapp.mercadoapp.model.Product;
 import com.mercadoapp.mercadoapp.model.Sector;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProductController {
     @FXML
@@ -38,10 +42,10 @@ public class ProductController {
     private TableColumn<Product, String> brandColumn;
 
     @FXML
-    private TableColumn<Product, Integer> categoryIdColumn;
+    private TableColumn<Product, String> categoryIdColumn;
 
     @FXML
-    private TableColumn<Product, Integer> sectorIdColumn;
+    private TableColumn<Product, String> sectorIdColumn;
 
     @FXML
     private TextField productNameField;
@@ -51,6 +55,10 @@ public class ProductController {
 
     @FXML
     private TextField productBrandField;
+
+    private Map<Integer, String> categoryMap = new HashMap<>();
+
+    private Map<Integer, String> sectorMap = new HashMap<>();
 
     @FXML
     private ComboBox<Category> categoryComboBox;
@@ -62,6 +70,10 @@ public class ProductController {
 
     @FXML
     public void initialize() {
+
+        /** Aplicando método para formatar o texto do preço com vírgula,
+         * sem necessidade de input da vírgula pelo user */
+        applyCurrencyMask(productPriceField);
         productTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newSelection) -> {
             if (newSelection != null) {
                 productNameField.setText(newSelection.getName());
@@ -75,11 +87,22 @@ public class ProductController {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
-        categoryIdColumn.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
-        sectorIdColumn.setCellValueFactory(new PropertyValueFactory<>("sectorId"));
 
         loadCategories();
         loadSectors();
+
+        categoryIdColumn.setCellValueFactory(cellData -> {
+            Integer id = cellData.getValue().getCategoryId();
+            String name = categoryMap.getOrDefault(id, "N/A");
+            return new SimpleStringProperty(name);
+                });
+
+        sectorIdColumn.setCellValueFactory(cellData -> {
+            Integer id = cellData.getValue().getSectorId();
+            String name = sectorMap.getOrDefault(id, "N/A");
+            return new SimpleStringProperty(name);
+        });
+
         loadProducts();
     }
 
@@ -101,12 +124,26 @@ public class ProductController {
     }
     private void loadCategories() {
         CategoryDAO dao = new CategoryDAO();
-        categoryComboBox.getItems().setAll(dao.findAll());
+        List<Category> categories = dao.findAll();
+
+        categoryComboBox.getItems().setAll(categories);
+
+        categoryMap.clear();
+        for (Category c : categories) {
+            categoryMap.put(c.getId(), c.getName());
+        }
     }
 
     private void loadSectors() {
         SectorDAO dao = new SectorDAO();
-        sectorComboBox.getItems().setAll(dao.findAll());
+        List<Sector> sectors = dao.findAll();
+
+        sectorComboBox.getItems().setAll(sectors);
+
+        sectorMap.clear();
+        for (Sector s : sectors) {
+            sectorMap.put(s.getId(), s.getName());
+        }
     }
 
     protected void loadProducts() {
@@ -141,7 +178,11 @@ public class ProductController {
             return;
         }
         try{
-            Double price = Double.parseDouble(priceText);
+            Double price = Double.parseDouble(
+                    productPriceField.getText()
+                            .replace(",", ".")
+                            .trim()
+            );
 
             Product product = new Product(null, nameText, price, brandText, selectedCategory.getId(), selectedSector.getId());
 
@@ -188,8 +229,11 @@ public class ProductController {
             return;
         }
         try{
-            Double price = Double.parseDouble(newPrice);
-
+            Double price = Double.parseDouble(
+                    productPriceField.getText()
+                            .replace(",", ".")
+                            .trim()
+            );
             Product updated = new Product(
                     selected.getId(),
                     newName,
@@ -221,5 +265,29 @@ public class ProductController {
         } catch (IOException e) {
             throw new RuntimeException("Erro ao voltar para a tela principal", e);
         }
+
     }
+        private void applyCurrencyMask(TextField field) {
+
+            field.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return;
+                }
+                String digits = newValue.replaceAll("[^\\d]", "");
+
+                if (digits.isEmpty()) {
+                    field.setText("");
+                    return;
+                }
+                double value = Double.parseDouble(digits) / 100;
+                String formatted = String.format("%.2f", value).replace(".", ",");
+                if (formatted.equals(newValue)) {
+                    return;
+                }
+
+                field.setText(formatted);
+
+                field.positionCaret(field.getText().length());
+            });
+        }
 }
