@@ -1,7 +1,7 @@
 module com.mercadoapp.mercadoapp {
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.sql;
+    requires org.xerial.sqlitejdbc;
 
 
     opens com.mercadoapp.mercadoapp to javafx.fxml;

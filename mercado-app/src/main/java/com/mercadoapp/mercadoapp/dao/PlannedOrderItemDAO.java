@@ -52,6 +52,37 @@ public class PlannedOrderItemDAO {
         }
         return plannedOrderItems;
     }
+    public List<PlannedOrderItem> findByPlannedOrderId(Integer plannedOrderId) {
+        String sql = "SELECT * FROM planned_order_item_table WHERE planned_order_id = ?";
+        List<PlannedOrderItem> items = new ArrayList<>();
+
+        try (Connection conn = SQLiteConnection.connect();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, plannedOrderId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Integer id = rs.getInt("id");
+                Integer productId = rs.getInt("product_id");
+                int quantity = rs.getInt("planned_quantity");
+                Double expectedPrice = rs.getDouble("expected_price");
+
+                PlannedOrderItem item = new PlannedOrderItem(
+                        id,
+                        productId,
+                        plannedOrderId,
+                        quantity,
+                        expectedPrice
+                );
+                items.add(item);
+            }
+        } catch (SQLException e){
+            throw new RuntimeException("Erro ao buscar itens da lista!", e);
+        }
+        return items;
+    }
+
     public void delete(PlannedOrderItem plannedOrderItem) {
         String sql = "DELETE FROM planned_order_item_table WHERE id = ?";
         try (Connection conn = SQLiteConnection.connect();

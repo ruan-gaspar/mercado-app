@@ -1,14 +1,17 @@
 package com.mercadoapp.mercadoapp.model;
+
+import java.time.LocalDateTime;
+
 // Essa classe representa uma compra mensal
 public class Order {
     private Integer id;
-    private String name; //Para o usuário esse vai ser o mês da compra no input
-    private String createdAt;
+    private String monthReference;
+    private LocalDateTime createdAt;
     private double totalAmount;
 
-    public Order(Integer id, String name, String createdAt, double totalAmount) {
+    public Order(Integer id, String monthReference, LocalDateTime createdAt, double totalAmount) {
       this.id = id;
-      this.name = name;
+      this.monthReference = monthReference;
       this.createdAt = createdAt;
       this.totalAmount = totalAmount;
     }
@@ -18,16 +21,16 @@ public class Order {
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+    public String getMonthReference() {
+        return monthReference;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setMonthReference(String monthReference) {
+        this.monthReference = monthReference;
     }
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
     public double getTotalAmount() {
@@ -39,7 +42,7 @@ public class Order {
     @Override
     public String toString(){
         return "Id: " + id +
-                ", Name (monthReference): " + name +
+                ", MonthReference: " + monthReference +
                 ", CreatedAt: " + createdAt +
                 ", TotalAmount: " + totalAmount;
     }

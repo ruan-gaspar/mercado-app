@@ -25,9 +25,9 @@ public class OrderItemDAO {
             stmt.setDouble(5, orderItem.getSubtotal());
             stmt.executeUpdate();
 
-            System.out.println("Salvo com sucesso!");
+            System.out.println("Item da compra salvo com sucesso!");
         }catch (SQLException e) {
-            throw new RuntimeException("Erro ao inserir item", e);
+            throw new RuntimeException("Erro ao inserir item da compra ", e);
         }
     }
     public List<OrderItem> findAll() {
@@ -40,17 +40,43 @@ public class OrderItemDAO {
                 Integer id = rs.getInt("id");
                 Integer orderId = rs.getInt("order_id");
                 Integer productId = rs.getInt("product_id");
-                Integer quantity = rs.getInt("quantity");
+                int quantity = rs.getInt("quantity");
                 Double unitPrice = rs.getDouble("unit_price");
                 Double subtotal = rs.getDouble("subtotal");
                 OrderItem orderItem = new OrderItem(id, orderId, productId, quantity, unitPrice, subtotal);
                 orderItems.add(orderItem);
             }
         }catch(SQLException e){
-            throw new RuntimeException("Erro ao buscar itens", e);
+            throw new RuntimeException("Erro ao buscar itens da compra ", e);
         }
         return orderItems;
     }
+    public List<OrderItem> findByOrderItemId(Integer orderId) {
+        String sql = "SELECT * FROM order_item_table WHERE order_id = ?";
+        List<OrderItem> orderItems = new ArrayList<>();
+
+        try (Connection conn = SQLiteConnection.connect();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+             stmt.setInt(1, orderId);
+             ResultSet rs = stmt.executeQuery();
+
+             while (rs.next()) {
+                 Integer id = rs.getInt("id");
+                 Integer productId = rs.getInt("product_id");
+                 int quandity = rs.getInt("quantity");
+                 Double unitPrice = rs.getDouble("unit_price");
+                 Double subtotal = rs.getDouble("subtotal");
+
+                 OrderItem orderItem = new OrderItem(id, orderId, productId, quandity, unitPrice, subtotal);
+                 orderItems.add(orderItem);
+            }
+        } catch (SQLException e) {
+             throw new RuntimeException("Erro ao buscar itens da compra!", e);
+        }
+        return orderItems;
+    }
+
     public void delete(OrderItem orderItem) {
         String sql = "DELETE FROM order_item_table WHERE id = ?";
         try (Connection conn = SQLiteConnection.connect();
@@ -58,9 +84,9 @@ public class OrderItemDAO {
             stmt.setInt(1, orderItem.getId());
             stmt.executeUpdate();
 
-            System.out.println("Excluído com sucesso!");
+            System.out.println("Item da compra excluído com sucesso!");
         }catch (SQLException e) {
-            throw new RuntimeException("Erro ao excluir item", e);
+            throw new RuntimeException("Erro ao excluir item da compra!", e);
         }
     }
     public void update(OrderItem orderItem) {
@@ -80,9 +106,9 @@ public class OrderItemDAO {
             stmt.setInt(6, orderItem.getId());
             stmt.executeUpdate();
 
-            System.out.println("Item atualizado com sucesso!");
+            System.out.println("Item da compra atualizado com sucesso!");
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizar item", e);
+            throw new RuntimeException("Erro ao atualizar item da compra!", e);
         }
     }
 }

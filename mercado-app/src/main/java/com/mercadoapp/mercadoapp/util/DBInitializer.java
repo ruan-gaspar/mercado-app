@@ -51,7 +51,7 @@ public class DBInitializer {
         String sql = """
             CREATE TABLE IF NOT EXISTS order_table (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
+            month_reference TEXT NOT NULL,
             created_at TEXT NOT NULL,
             total_amount REAL NOT NULL
             )
