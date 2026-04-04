@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.mercadoapp.mercadoapp.controller.PlannedOrderItemController"
+           stylesheets="@../css/app.css"
+           styleClass="app-root">
+
+    <children>
+        <VBox alignment="TOP_CENTER" spacing="18.0" styleClass="screen-card" maxWidth="1080.0">
+            <padding>
+                <Insets top="28.0" right="28.0" bottom="28.0" left="28.0"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                <Button fx:id="backButton" text="← Voltar" onAction="#goBackToMain" styleClass="secondary-button"/>
+                <VBox spacing="4.0">
+                    <Label text="Itens da Lista Planejada" styleClass="screen-title"/>
+                    <Text text="Associe produtos à lista planejada e defina quantidade e preço esperado." styleClass="screen-subtitle"/>
+                </VBox>
+            </HBox>
+
+            <GridPane hgap="12.0" vgap="12.0">
+                <ComboBox fx:id="plannedOrderComboBox" promptText="Selecione a lista planejada" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="form-field"/>
+                <ComboBox fx:id="productComboBox" promptText="Selecione o produto" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="form-field"/>
+                <TextField fx:id="plannedOrderItemQuantityField" promptText="Quantidade planejada" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="form-field"/>
+                <TextField fx:id="plannedOrderItemExpectedPriceField" promptText="Preço esperado" GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="form-field"/>
+            </GridPane>
+
+            <HBox spacing="10.0">
+                <Button text="Adicionar item" onAction="#onAddPlannedOrderItem" styleClass="primary-button"/>
+                <Button text="Atualizar item" onAction="#onUpdatePlannedOrderItem" styleClass="secondary-button"/>
+                <Button text="Remover item" onAction="#onDeletePlannedOrderItem" styleClass="danger-button"/>
+            </HBox>
+
+            <TableView fx:id="plannedOrderItemTable" prefHeight="460.0" styleClass="modern-table">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="70.0"/>
+                    <TableColumn fx:id="plannedOrderIdColumn" text="Lista planejada" prefWidth="260.0"/>
+                    <TableColumn fx:id="productIdColumn" text="Produto" prefWidth="260.0"/>
+                    <TableColumn fx:id="plannedQuantityColumn" text="Quantidade" prefWidth="150.0"/>
+                    <TableColumn fx:id="expectedPriceColumn" text="Preço esperado" prefWidth="180.0"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </children>
+</StackPane>

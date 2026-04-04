@@ -1,41 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TextField?>
-
 <?import javafx.scene.control.ComboBox?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mercadoapp.mercadoapp.controller.ProductController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-    <Button fx:id="backButton" text="Voltar" onAction="#goBackToMain"/>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.mercadoapp.mercadoapp.controller.ProductController"
+           stylesheets="@../css/app.css"
+           styleClass="app-root">
 
-    <TextField fx:id="productNameField" promptText="Nome do produto"/>
-    <TextField fx:id="productPriceField" promptText="Preço do produto"/>
-    <TextField fx:id="productBrandField" promptText="Marca do produto"/>
+    <children>
+        <VBox alignment="TOP_CENTER" spacing="18.0" styleClass="screen-card" maxWidth="1100.0">
+            <padding>
+                <Insets top="28.0" right="28.0" bottom="28.0" left="28.0"/>
+            </padding>
 
-    <ComboBox fx:id="categoryComboBox" promptText="Selecione a categoria"/>
-    <ComboBox fx:id="sectorComboBox" promptText="Selecione o setor"/>
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                <Button fx:id="backButton"
+                        text="← Voltar"
+                        onAction="#goBackToMain"
+                        styleClass="secondary-button"/>
+                <VBox spacing="4.0">
+                    <Label text="Produtos" styleClass="screen-title"/>
+                    <Text text="Cadastre produtos com preço, marca, categoria e setor."
+                          styleClass="screen-subtitle"/>
+                </VBox>
+            </HBox>
 
-    <Button text="Adicionar produto" onAction="#onAddProduct"/>
-    <Button text="Remover produto" onAction="#onDeleteProduct"/>
-    <Button text="Atualizar produto" onAction="#onUpdateProduct"/>
+            <GridPane hgap="12.0" vgap="12.0">
+                <TextField fx:id="productNameField"
+                           promptText="Nome do produto"
+                           styleClass="form-field"
+                           GridPane.columnIndex="0"
+                           GridPane.rowIndex="0"/>
 
-    <TableView fx:id="productTable" prefHeight="300.0" prefWidth="400.0">
-        <columns>
-            <TableColumn fx:id="idColumn" text="ID" prefWidth="80.0"/>
-            <TableColumn fx:id="nameColumn" text="Nome" prefWidth="320.0"/>
-            <TableColumn fx:id="priceColumn" text="Preço" prefWidth="320.0"/>
-            <TableColumn fx:id="brandColumn" text="Marca" prefWidth="320.0"/>
-            <TableColumn fx:id="categoryIdColumn" text="Categoria" prefWidth="320.0"/>
-            <TableColumn fx:id="sectorIdColumn" text="Setor" prefWidth="320.0"/>
-        </columns>
-    </TableView>
-</VBox>
+                <TextField fx:id="productPriceField"
+                           promptText="Preço"
+                           styleClass="form-field"
+                           GridPane.columnIndex="1"
+                           GridPane.rowIndex="0"/>
+
+                <TextField fx:id="productBrandField"
+                           promptText="Marca"
+                           styleClass="form-field"
+                           GridPane.columnIndex="2"
+                           GridPane.rowIndex="0"/>
+
+                <ComboBox fx:id="categoryComboBox"
+                          promptText="Selecione a categoria"
+                          styleClass="form-field"
+                          GridPane.columnIndex="0"
+                          GridPane.rowIndex="1"/>
+
+                <ComboBox fx:id="sectorComboBox"
+                          promptText="Selecione o setor"
+                          styleClass="form-field"
+                          GridPane.columnIndex="1"
+                          GridPane.rowIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="10.0">
+                <Button text="Adicionar produto"
+                        onAction="#onAddProduct"
+                        styleClass="primary-button"/>
+
+                <Button text="Atualizar produto"
+                        onAction="#onUpdateProduct"
+                        styleClass="secondary-button"/>
+
+                <Button text="Remover produto"
+                        onAction="#onDeleteProduct"
+                        styleClass="danger-button"/>
+            </HBox>
+
+            <TableView fx:id="productTable" prefHeight="460.0" styleClass="modern-table">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" prefWidth="70.0"/>
+                    <TableColumn fx:id="nameColumn" text="Nome" prefWidth="220.0"/>
+                    <TableColumn fx:id="priceColumn" text="Preço" prefWidth="120.0"/>
+                    <TableColumn fx:id="brandColumn" text="Marca" prefWidth="160.0"/>
+                    <TableColumn fx:id="categoryIdColumn" text="Categoria" prefWidth="220.0"/>
+                    <TableColumn fx:id="sectorIdColumn" text="Setor" prefWidth="220.0"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </children>
+</StackPane>

@@ -1,16 +1,72 @@
-<?import javafx.scene.layout.VBox?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="15.0"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mercadoapp.mercadoapp.controller.MainController">
-<padding>
-    <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
-</padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-    <Button fx:id="orderButton" text="Lista de Compras" onAction="#openOrderScreen"/>
-    <Button fx:id="itemListButton" text="Lista de itens" onAction="#openInventoryScreen"/>
-    <Button fx:id="productButton" text="Produtos" onAction="#openProductDetailScreen"/>
-    <Button fx:id="categoryButton" text="Categorias" onAction="#openCategoryScreen"/>
-    <Button fx:id="sectorButton" text="Setores" onAction="#openSectorScreen"/>
-</VBox>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.mercadoapp.mercadoapp.controller.MainController"
+           stylesheets="@../css/main.css"
+           styleClass="app-root">
+
+    <children>
+        <VBox alignment="CENTER" spacing="18.0" styleClass="main-card" maxWidth="460.0">
+            <padding>
+                <Insets top="32.0" right="32.0" bottom="32.0" left="32.0"/>
+            </padding>
+
+            <Label text="Mercado App" styleClass="app-title"/>
+            <Label text="Gerencie produtos, listas planejadas e compras realizadas"
+                   wrapText="true"
+                   styleClass="app-subtitle"/>
+
+            <VBox spacing="12.0" fillWidth="true">
+
+                <Button fx:id="plannedOrderButton"
+                        text="Lista Planejada"
+                        onAction="#openPlannedOrderScreen"
+                        maxWidth="Infinity"
+                        styleClass="menu-button"/>
+
+                <Button fx:id="plannedOrderItemButton"
+                        text="Itens da Lista Planejada"
+                        onAction="#openPlannedOrderItemScreen"
+                        maxWidth="Infinity"
+                        styleClass="menu-button"/>
+
+                <Button fx:id="orderButton"
+                        text="Compras Realizadas"
+                        onAction="#openOrderScreen"
+                        maxWidth="Infinity"
+                        styleClass="menu-button"/>
+
+                <Button fx:id="orderItemButton"
+                        text="Itens da Compra"
+                        onAction="#openOrderItemScreen"
+                        maxWidth="Infinity"
+                        styleClass="menu-button"/>
+
+                <Button fx:id="productButton"
+                        text="Produtos"
+                        onAction="#openProductScreen"
+                        maxWidth="Infinity"
+                        styleClass="menu-button"/>
+
+                <Button fx:id="categoryButton"
+                        text="Categorias"
+                        onAction="#openCategoryScreen"
+                        maxWidth="Infinity"
+                        styleClass="menu-button"/>
+
+                <Button fx:id="sectorButton"
+                        text="Setores"
+                        onAction="#openSectorScreen"
+                        maxWidth="Infinity"
+                        styleClass="menu-button"/>
+
+            </VBox>
+        </VBox>
+    </children>
+</StackPane>

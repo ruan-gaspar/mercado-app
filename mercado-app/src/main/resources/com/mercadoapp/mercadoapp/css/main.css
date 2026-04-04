@@ -1,0 +1,43 @@
+.app-root {
+    -fx-background-color: linear-gradient(to bottom right, #000000, #1e293b);
+}
+
+.main-card {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 30, 0.2, 0, 10);
+}
+
+.app-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.app-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #cbd5e1;
+    -fx-text-alignment: center;
+}
+
+.menu-button {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-padding: 14 18 14 18;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+}
+
+.menu-button:hover {
+    -fx-background-color: #334155;
+}
+
+.menu-button:pressed {
+    -fx-background-color: #475569;
+}
