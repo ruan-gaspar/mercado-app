@@ -267,27 +267,27 @@ public class ProductController {
         }
 
     }
-        private void applyCurrencyMask(TextField field) {
+    private void applyCurrencyMask(TextField field) {
 
-            field.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return;
-                }
-                String digits = newValue.replaceAll("[^\\d]", "");
+        field.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return;
+            }
+            String digits = newValue.replaceAll("[^\\d]", "");
 
-                if (digits.isEmpty()) {
-                    field.setText("");
-                    return;
-                }
-                double value = Double.parseDouble(digits) / 100;
-                String formatted = String.format("%.2f", value).replace(".", ",");
-                if (formatted.equals(newValue)) {
-                    return;
-                }
+            if (digits.isEmpty()) {
+                field.setText("");
+                return;
+            }
+            double value = Double.parseDouble(digits) / 100;
+            String formatted = String.format("%.2f", value).replace(".", ",");
+            if (formatted.equals(newValue)) {
+                return;
+            }
 
-                field.setText(formatted);
+            field.setText(formatted);
 
-                field.positionCaret(field.getText().length());
-            });
-        }
+            field.positionCaret(field.getText().length());
+        });
+    }
 }

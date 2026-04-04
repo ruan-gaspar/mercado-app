@@ -5,9 +5,9 @@ public class PlannedOrderItem {
     private Integer productId;
     private Integer plannedOrderId;
     private int plannedQuantity;
-    private double expectedPrice;
+    private Double expectedPrice;
 
-    public PlannedOrderItem(Integer id, Integer productId, Integer plannedOrderId, int plannedQuantity, double expectedPrice) {
+    public PlannedOrderItem(Integer id, Integer productId, Integer plannedOrderId, int plannedQuantity, Double expectedPrice) {
         this.id = id;
         this.productId = productId;
         this.plannedOrderId = plannedOrderId;
@@ -38,10 +38,10 @@ public class PlannedOrderItem {
     public void setPlannedQuantity(int plannedQuantity) {
         this.plannedQuantity = plannedQuantity;
     }
-    public double getExpectedPrice() {
+    public Double getExpectedPrice() {
         return expectedPrice;
     }
-    public void setExpectedPrice(double expectedPrice) {
+    public void setExpectedPrice(Double expectedPrice) {
         this.expectedPrice = expectedPrice;
     }
     @Override
