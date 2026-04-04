@@ -121,7 +121,7 @@ public class PlannedOrderController {
             stage.show();
 
         }catch(IOException e){
-            throw new RuntimeException("Erro ao voltar para a tela principal",e);
+            throw new RuntimeException("Erro ao voltar para a tela principal!",e);
         }
     }
 }

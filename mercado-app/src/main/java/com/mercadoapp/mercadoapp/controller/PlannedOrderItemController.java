@@ -218,7 +218,7 @@ public class PlannedOrderItemController {
             loadPlannedOrderItems();
 
         } catch (NumberFormatException e) {
-            System.out.println("Quantidade ou preço inválidos");
+            System.out.println("Quantidade ou preço inválidos!");
         }
     }
 
@@ -273,7 +273,7 @@ public class PlannedOrderItemController {
             clearFields();
 
         } catch (NumberFormatException e) {
-            System.out.println("Quantidade ou preço inválidos");
+            System.out.println("Quantidade ou preço inválidos!");
         }
     }
     @FXML
@@ -289,7 +289,7 @@ public class PlannedOrderItemController {
             stage.show();
 
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao voltar para a tela principal", e);
+            throw new RuntimeException("Erro ao voltar para a tela principal!", e);
         }
 
     }

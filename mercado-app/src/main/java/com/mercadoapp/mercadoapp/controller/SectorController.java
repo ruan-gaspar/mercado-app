@@ -3,7 +3,6 @@ package com.mercadoapp.mercadoapp.controller;
 import com.mercadoapp.mercadoapp.dao.SectorDAO;
 import com.mercadoapp.mercadoapp.model.Sector;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
